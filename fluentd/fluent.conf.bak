@@ -1,0 +1,40 @@
+<source>
+  type forward
+  port 24224
+  bind 0.0.0.0
+
+</source>
+
+<match docker.**>
+  type elasticsearch
+  logstash_format true
+  host elasticsearch
+  port 9200
+  flush_interval 5s
+</match>
+
+
+<source>
+  type tail
+  path /var/lib/docker/containers/*/*-json.log
+  pos_file /var/log/fluentd-docker.pos
+  time_format %Y-%m-%dT%H:%M:%S 
+  tag docker.*
+  format json
+</source>
+
+<match docker.var.lib.docker.containers.*.*.log>
+  type record_reformer
+  container_id ${tag_parts[5]}
+  tag docker.all
+</match>
+
+<match docker.all>
+  type elasticsearch
+  log_level info
+  host onehao.pw
+  port 24224
+  include_tag_key true 
+  logstash_format true
+  flush_intercal 5s
+</match>
