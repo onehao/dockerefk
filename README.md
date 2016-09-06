@@ -44,6 +44,9 @@ open http://localhot:5601
 # if use docker-machine
 open http://"$(docker-machine ip dev)":5601
 ```
+For ElasticSearch need to install the following two plugins.
+bin/plugin install license
+bin/plugin install marvel-agent
 
 If you use docker-toolbox, localhost is docker-machine ip.
 
