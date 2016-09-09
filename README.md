@@ -51,3 +51,6 @@ bin/plugin install marvel-agent
 If you use docker-toolbox, localhost is docker-machine ip.
 
 
+Build and run fluentd
+docker build ./fluentd
+docker run -d -p 24224:24224 -v /home/data/mnt/docker/containers:/var/lib/docker/containers fluent/fluentd:latest
