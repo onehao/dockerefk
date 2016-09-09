@@ -12,7 +12,7 @@ kibana:
   links:
     - elasticsearch
 fluentd:
-  build: fluentd/
+  image: teragrid/td-agent
   volumes:
     - /home/data/mnt/docker/containers:/var/lib/docker/containers
   links:
